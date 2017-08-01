@@ -1,0 +1,11 @@
+<div class="col-md-4 col-sm-4 contactslist">
+	<div class="list-group">
+		<a href="#!/contacts/{{$index}}" ng-repeat="contact in $ctrl.contacts" class="list-group-item">
+			<img ng-src="{{contact.smallImageURL}}" img-placeholder alt="{{contact.name}}" class="thumb"/>
+			<div class="list-text">
+			<h3>{{contact.name}} <span class="glyphicon" ng-class="{'glyphicon-star': $ctrl.contacts[$index].favorite}"></span></h3>
+			<h4>{{contact.phone.work}}</h4>
+			</div>
+		</a>
+	</div>
+</div>

@@ -1,25 +1,142 @@
 /* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+h2 {
+	margin:0px 0px;
 }
 
-.menu:before {
-  content: "[";
+
+h3 {
+	display:inline-block;
+	margin: 2px 0px 2px;
+	font-size: 1.5em;
 }
 
-.menu:after {
-  content: "]";
+h4 {
+	margin: 10px 0px 0px;
 }
 
-.menu > li {
-  display: inline;
+hgroup {
+	max-width: 50%;
+	margin: 10px 0px 0px 10px;
+	display:inline-block;
 }
 
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+input {
+	max-width: 100%;
+}
+
+.h2like {
+	font-size: 2.1em;
+	font-weight: 500;
+}
+
+.list-text {
+	display:inline-block;
+	margin: 0px 10px;
+}
+
+.thumb {
+	width: 60px;
+	height: 60px;
+	margin: 0;
+	display:inline-block;
+}
+
+.col-md-4.contactslist {
+  padding:2px;
+	overflow: scroll;
+	height: 100vh;
+}
+
+.col-md-8 {
+	padding:0;
+}
+
+.list-group-item {
+	padding: 10px 15px;
+	display:flex;
+	align-content:flex-start;
+	align-items:flex-start;
+}
+
+.photo {
+	margin: 20px 5px 0px 20px;
+	display: inline-block;
+	width:150px;
+	height:150px;
+	vertical-align: top;
+}
+
+.contactinfo {
+	list-style: none;
+	margin: 10px 0px;
+	padding: 0px 20px;
+	font-size: 1.5em;
+}
+
+.num {
+	min-width: 70%;
+	display:inline-block;
+}
+
+.phonetype {
+	min-width: 30%;
+	display:inline-block;
+	text-transform:capitalize;
+}
+
+.glyphbtn {
+	color: #000;
+	margin: 10px;
+	display:inline-block;
+}
+
+.glyphbtn:hover, .glyphbtn:active {
+	text-decoration: none;
+}
+
+.glyphbtn > span.glyphicon {
+	font-size:2.5em;
+}
+
+.btntext {
+	font-size: 2em;
+	display:inline-block;
+	vertical-align: top;
+}
+
+.btndiv {
+	position: absolute;
+	top: 0;
+	right: 10px;
+}
+
+.defaulttext {
+	margin:30px;
+	text-align:center;
+}
+
+@media only screen and (max-width: 768px) {
+
+	h2, .h2like {
+		font-size: 1.5em;
+	}
+
+	hgroup {
+		margin: 15px 0px 0px 15px;
+	}
+
+	.photo {
+		width: 100px;
+		height: 100px;
+		margin: 20px 0px 0px 15px;
+	}
+
+	.contactinfo {
+		font-size: 1.25em;
+		padding: 0px 15px;
+	}
+
+	.glyphbtn {
+		font-size: 0.75em;
+	}
 }

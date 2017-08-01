@@ -2,41 +2,75 @@
 
 /* https://github.com/angular/protractor/blob/master/docs/toc.md */
 
-describe('my app', function() {
+describe('contactsDemo', function() {
 
-
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    browser.get('index.html');
-    expect(browser.getLocationAbsUrl()).toMatch("/view1");
-  });
-
-
-  describe('view1', function() {
+  describe('contactsList', function() {
 
     beforeEach(function() {
-      browser.get('index.html#!/view1');
+      browser.get('index.html');
     });
 
+    it('should display a list item for each contact', function() {
+      var listnames = element.all(by.repeater('contact in $ctrl.contacts').column('contact.name'));
 
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
+      expect(listnames.count()).toBeGreaterThan(0);
+
+      var getNames = function() {
+        return listnames.map(function(elem) {
+          return elem.getText();
+        });
+      }
+
+      expect(getNames()).toEqual(jasmine.arrayContaining(['Essie Vaill']));
     });
 
+    it('should route to `index.html#!/contacts/contactindex` when list item is clicked', function() {
+      var list = element.all(by.repeater('contact in $ctrl.contacts'));
+      var tlistitem = list.filter(function(elem, index) {
+        return elem.element(by.binding('contact.name')).getText().then(function(text) {
+          return text === 'Essie Vaill';
+        });
+      });
+
+      expect(browser.getLocationAbsUrl()).toBe('/contacts');
+
+      tlistitem.click();
+
+      expect(browser.getLocationAbsUrl()).toBe('/contacts/0');
+    });
   });
 
+  describe('contactsView', function() {
+      var editbtn;
 
-  describe('view2', function() {
+      beforeEach(function() {
+        browser.get('index.html#!/contacts/0');
+        editbtn = element.all(by.css('.glyphbtn')).filter(function(elem, index) {
+          return elem.element(by.css('.glyphicon-pencil')).isPresent();
+        });
+      });
 
-    beforeEach(function() {
-      browser.get('index.html#!/view2');
-    });
+      it('should show the correct info for the selected contact', function() {
+        expect(element(by.binding('$ctrl.contact.name')).getText()).toBe('Essie Vaill');
+        expect(element(by.binding('$ctrl.contact.company')).getText()).toBe('Litronic Industries');
+      });
 
+      it('should display inputs when edit toggle button is clicked', function() {
+        expect(editbtn.all(by.css('.glyphicon-pencil'))).toBeDefined();
 
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 2/);
-    });
+        editbtn.click();
 
+        expect(element.all(by.tagName('input')).count()).toBeGreaterThan(0);
+      });
+
+      it('should toggle edit when enter is pressed on inputs', function() {
+        editbtn.click();
+
+        var editinput = element(by.model('$ctrl.contact.name'));
+
+        editinput.sendKeys(protractor.Key.ENTER);
+
+        expect(element.all(by.tagName('input')).count()).toBe(0);
+      });
   });
 });

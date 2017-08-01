@@ -1,0 +1,58 @@
+<div class="">
+<nav>
+	<a class="glyphbtn hidden-md hidden-lg hidden-sm" href="#!/contacts/"><span class="glyphicon glyphicon-chevron-left"></span><span class="btntext">All Contacts</span></a>
+	<div class="btndiv">
+		<a class="glyphbtn" ng-click="$ctrl.toggleFavorite()"><span id="favorite" class="glyphicon" ng-class="{'glyphicon-star': $ctrl.contact.favorite, 'glyphicon-star-empty': !$ctrl.contact.favorite}"></span></a>
+		<a class="glyphbtn" ng-click="$ctrl.toggleEdit()"><span class="glyphicon glyphicon-pencil"></span></a>
+	</div>
+</nav>
+
+<header>
+	<span class="photospot">
+		<img ng-src="{{$ctrl.contact.largeImageURL}}" img-placeholder alt="{{$ctrl.contact.name}}" class="photo"/>
+	</span>
+	<hgroup ng-switch on="$ctrl.edit">
+	<h4>Name:</h4>
+	<h2 ng-switch-when="false">{{$ctrl.contact.name}}</h2>
+	<input ng-switch-when="true" ng-model="$ctrl.contact.name" ng-keyup="$ctrl.enter($event)" class="h2like"></input>
+	<h4>Company:</h4>
+	<h2 ng-switch-when="false">{{$ctrl.contact.company}}</h2>
+	<input ng-switch-when="true" ng-model="$ctrl.contact.company" ng-keyup="$ctrl.enter($event)" class="h2like"></input>
+	</hgroup>
+</header>
+
+<ul class="contactinfo">
+	<li>
+		<dl ng-switch on="$ctrl.edit">
+			<dt>Phone:</dt>
+			<dd ng-switch-when="false" ng-repeat="(phonetype, phonenum) in $ctrl.contact.phone">
+				<span class="num">{{phonenum}}</span><span class="phonetype">{{phonetype}}</span>
+			</dd>
+			<dd ng-switch-when="true" ng-repeat="(phonetype, phonenum) in $ctrl.contact.phone">
+				<span><input ng-model="$ctrl.contact.phone[phonetype]" ng-keyup="$ctrl.enter($event)"></input></span><span class="phonetype">{{phonetype}}</span>
+			</dd>
+		</dl>
+	</li>
+	<li>
+		<dl ng-switch on="$ctrl.edit">
+			<dt>Address:</dt>
+			<dd ng-switch-when="false">{{$ctrl.contact.address.street}}</dd>
+			<dd ng-switch-when="false">{{$ctrl.contact.address.city}}, {{$ctrl.contact.address.state}} {{$ctrl.contact.address.zip}}</dd>
+			<dd ng-switch-when="true"><input ng-model="$ctrl.contact.address.city" ng-keyup="$ctrl.enter($event)"></input>, <input ng-model="$ctrl.contact.address.state" ng-keyup="$ctrl.enter($event)"></input> <input ng-model="$ctrl.contact.address.zip" ng-keyup="$ctrl.enter($event)"></input></dd>
+		<dl>
+	</li>
+	<li>
+		<dl ng-switch on="$ctrl.edit">
+			<dt>Birthday:</dt>
+			<dd ng-switch-when="false">{{$ctrl.contact.birthdatestr}}</dd>
+			<dd ng-switch-when="true"><input ng-model="$ctrl.contact.birthdatestr" ng-keyup="$ctrl.enter($event)"></input></dd>
+		</dl>
+	</li>
+	<li>
+		<dl ng-switch on="$ctrl.edit">
+			<dt>E-mail:</dt>
+			<dd ng-switch-when="false">{{$ctrl.contact.email}}</dd>
+			<dd ng-switch-when="true"><input ng-model="$ctrl.contact.email" ng-keyup="$ctrl.enter($event)"></input></dd>
+		</dl>
+</ul>
+</div>
