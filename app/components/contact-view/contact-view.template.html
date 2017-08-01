@@ -38,6 +38,7 @@
 			<dt>Address:</dt>
 			<dd ng-switch-when="false">{{$ctrl.contact.address.street}}</dd>
 			<dd ng-switch-when="false">{{$ctrl.contact.address.city}}, {{$ctrl.contact.address.state}} {{$ctrl.contact.address.zip}}</dd>
+			<dd ng-switch-when="true"><input ng-model="$ctrl.contact.address.street" ng-keyup="$ctrl.enter($event)"></input></dd>
 			<dd ng-switch-when="true"><input ng-model="$ctrl.contact.address.city" ng-keyup="$ctrl.enter($event)"></input>, <input ng-model="$ctrl.contact.address.state" ng-keyup="$ctrl.enter($event)"></input> <input ng-model="$ctrl.contact.address.zip" ng-keyup="$ctrl.enter($event)"></input></dd>
 		<dl>
 	</li>
